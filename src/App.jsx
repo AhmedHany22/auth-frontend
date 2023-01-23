@@ -1,5 +1,11 @@
+import Registeration from "./Pages/Registration";
+
 function App() {
-  return <div className="App">App</div>;
+  return (
+    <>
+      <Registeration />
+    </>
+  );
 }
 
 export default App;
