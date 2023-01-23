@@ -1,9 +1,9 @@
-import Registeration from "./Pages/Registration";
+import Registration from "./Pages/Registration";
 
 function App() {
   return (
     <>
-      <Registeration />
+      <Registration />
     </>
   );
 }
