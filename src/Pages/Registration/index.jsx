@@ -2,7 +2,7 @@ import S from "./Registration.module.css";
 
 import { useState, useRef, useEffect } from "react";
 import CheckMark from "../../Components/CheckMark";
-import axios from "../../api/axios";
+import axios from "../../Api/axios";
 
 const PWD_REGEX = /^(?=.*[a-z])(?=.*[A-Z])(?=.*[0-9])(?=.*[!@#$%]).{8,24}$/;
 const NAME_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
@@ -72,6 +72,7 @@ const Registration = () => {
       if (!e?.response) setErrMsg("No server response");
       else if (e.response?.status == 409) setErrMsg("Username taken");
       else setErrMsg("Registration Failed");
+      errRef.current.focus();
     }
   };
 
@@ -109,7 +110,7 @@ const Registration = () => {
             <div className={S.img}></div>
             <div className={S.list}>
               {errMsg ? (
-                <div className={S.error} role="alert">
+                <div className={S.error} role="alert" ref={errRef}>
                   <svg
                     aria-hidden="true"
                     class="flex-shrink-0 inline w-5 h-5 mr-3"
