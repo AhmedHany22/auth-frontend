@@ -7,7 +7,6 @@ import AuthContext from "../../Context/AuthProvider";
 const LOGIN_URL = "/auth";
 
 const LogIn = () => {
-  const msgRef = useRef();
   const { setAuth } = useContext(AuthContext);
   const [firstName, setFirstName] = useState("");
   const [pwd, setPwd] = useState("");
@@ -23,22 +22,22 @@ const LogIn = () => {
     e.preventDefault();
     try {
       const response = await axios.post(LOGIN_URL, JSON.stringify({ user: firstName, pwd }));
-      console.log(response.data);
-      console.log(response.accessToken);
-      console.log(JSON.stringify(response));
-      const accessToken = response.data.accessToken;
-      const roles = response.data.roles;
-      setAuth({ user, pwd, accessToken, roles });
+      // console.log(response.data, " ------Data");
+      // console.log(response.data.accessToken, " ------Token");
+      // console.log(JSON.stringify(response), " ------Response");
+      const accessToken = response?.data?.accessToken;
+      const roles = response?.data?.roles;
+      setAuth({ user: firstName, pwd, accessToken, roles });
       setFirstName("");
       setPwd("");
-      setSuccess(true);
-      msgRef.current.focus();
+      setSuccess("Signed in successfully");
     } catch (e) {
       if (!e?.response) setErrMsg("No server response");
       else if (e.response?.status == 400) setErrMsg("Missing username or password");
       else if (e.response?.status == 401) setErrMsg("Unauthorized access");
       else setErrMsg("LogIn Failed");
-      msgRef.current.focus();
+
+      console.log("Error ------", e);
     }
   };
 
@@ -50,7 +49,7 @@ const LogIn = () => {
             <div className={ST.img}></div>
             <div className={ST.list}>
               {errMsg ? (
-                <div className={ST.error} role="alert" aria-live="assertive" ref={msgRef}>
+                <div className={ST.error} role="alert" aria-live="assertive">
                   <svg
                     aria-hidden="true"
                     className="flex-shrink-0 inline w-5 h-5 mr-3"
@@ -78,9 +77,9 @@ const LogIn = () => {
                     viewBox="0 0 20 20"
                     xmlns="http://www.w3.org/2000/svg">
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                      clip-rule="evenodd"></path>
+                      clipRule="evenodd"></path>
                   </svg>
                   <span className="sr-only">Info</span>
                   <div>
