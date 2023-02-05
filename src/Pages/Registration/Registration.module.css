@@ -1,5 +1,5 @@
 .container {
-  @apply font-mono bg-gray-800 min-h-screen;
+  @apply font-mono bg-gray-800 min-h-screen flex justify-center items-center;
 }
 .boundries {
   @apply flex justify-center px-6 py-12;
@@ -8,7 +8,7 @@
   @apply w-full xl:w-3/4 lg:w-11/12 flex;
 }
 .img {
-  background-image: url("https://source.unsplash.com/Mv9hjnEUHR4/600x800");
+  background-image: url("https://i.pinimg.com/564x/6d/86/09/6d86099fd694b7ed324417c7334c7933.jpg");
   @apply w-full h-auto bg-gray-400 hidden md:block lg:w-5/12 bg-cover bg-bottom rounded-l-lg;
 }
 .imgSuccess {

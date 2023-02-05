@@ -1,22 +1,19 @@
 .container {
-  @apply font-mono bg-gray-800 min-h-screen;
+  @apply font-mono bg-gray-800 min-h-screen flex justify-center items-center;
 }
 .boundries {
   @apply flex justify-center px-6 py-12;
 }
 .box {
-  @apply w-full xl:w-3/4 lg:w-11/12 flex;
+  @apply w-full xl:w-3/4 lg:w-11/12 flex h-full;
 }
 .img {
-  background-image: url("https://source.unsplash.com/Mv9hjnEUHR4/600x800");
-  @apply w-full h-auto bg-gray-400 hidden md:block lg:w-5/12 bg-cover bg-bottom rounded-l-lg;
+  background-image: url("https://i.pinimg.com/originals/db/ff/12/dbff1285e0a96e4df82a7ab2ea6bd093.png");
+  @apply w-full h-auto bg-gray-400 hidden md:block lg:w-7/12 bg-cover bg-center rounded-l-lg;
 }
-.imgSuccess {
-  background-image: url("https://source.unsplash.com/Mv9hjnEUHR4/600x800");
-  @apply w-full h-auto bg-gray-400 hidden md:block lg:w-11/12 bg-cover rounded-l-lg;
-}
+
 .list {
-  @apply w-full lg:w-7/12 bg-white p-5 rounded-lg md:rounded-l-none;
+  @apply w-full lg:w-5/12 bg-white p-5 rounded-lg md:rounded-l-none;
 }
 .title {
   @apply pt-4 text-2xl text-center;

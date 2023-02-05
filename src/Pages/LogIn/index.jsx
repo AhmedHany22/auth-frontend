@@ -43,7 +43,7 @@ const LogIn = () => {
 
   return (
     <div className={ST.container}>
-      <div className="container mx-auto">
+      <div className="container m-auto">
         <div className={ST.boundries}>
           <div className={ST.box}>
             <div className={ST.img}></div>
@@ -69,7 +69,7 @@ const LogIn = () => {
                 </div>
               ) : null}
               {success ? (
-                <div className={ST.success} role="alert" aria-live="assertive" ref={msgRef}>
+                <div className={ST.success} role="alert" aria-live="assertive">
                   <svg
                     aria-hidden="true"
                     className="flex-shrink-0 inline w-5 h-5 mr-3"
