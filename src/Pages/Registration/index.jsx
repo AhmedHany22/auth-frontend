@@ -9,7 +9,6 @@ const NAME_REGEX = /^[a-zA-Z][a-zA-Z0-9-_]{3,23}$/;
 const REGISTER_URL = "/register";
 
 const Registration = () => {
-  const firstNameRef = useRef();
   const errRef = useRef();
 
   const [firstName, setFirstName] = useState("");
@@ -26,10 +25,6 @@ const Registration = () => {
 
   const [errMsg, setErrMsg] = useState("");
   const [success, setSuccess] = useState(false);
-
-  useEffect(() => {
-    // firstNameRef.current.focus();
-  }, []);
 
   useEffect(() => {
     const result = NAME_REGEX.test(firstName);
