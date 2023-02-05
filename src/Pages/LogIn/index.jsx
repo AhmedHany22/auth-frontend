@@ -1,13 +1,13 @@
 import ST from "./Login.module.css";
 
-import { useState, useEffect, useRef, useContext } from "react";
+import { useState, useEffect } from "react";
 import axios from "../../Api/axios";
-import AuthContext from "../../Context/AuthProvider";
+import useAuth from "./../../Hooks/useAuth";
 
 const LOGIN_URL = "/auth";
 
 const LogIn = () => {
-  const { setAuth } = useContext(AuthContext);
+  const { setAuth } = useAuth();
   const [firstName, setFirstName] = useState("");
   const [pwd, setPwd] = useState("");
 
