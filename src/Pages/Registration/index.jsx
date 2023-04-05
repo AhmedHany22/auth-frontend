@@ -1,6 +1,10 @@
 import S from "./Registration.module.css";
 
+// External Import
 import { useState, useRef, useEffect } from "react";
+import { Link } from "react-router-dom";
+
+// Internal Import
 import CheckMark from "../../Components/CheckMark";
 import axios from "../../Api/axios";
 
@@ -55,7 +59,10 @@ const Registration = () => {
       setErrMsg("Invalid Entry");
     }
     try {
-      const response = await axios.post(REGISTER_URL, JSON.stringify({ user: firstName, pwd }));
+      const response = await axios.post(
+        REGISTER_URL,
+        JSON.stringify({ user: firstName, pwd })
+      );
       console.log(response.data);
       console.log(response.accessToken);
       console.log(JSON.stringify(response));
@@ -81,9 +88,12 @@ const Registration = () => {
               <div className="h-auto w-full bg-white rounded-lg md:rounded-l-none">
                 <div className="mt-48 ml-12 h-72 text-2xl text-green-700">
                   SignedUp Successfully
-                  <a href="#" className="block mt-3 text-sm text-blue-500 align-baseline hover:text-blue-800">
+                  <Link
+                    to="/login"
+                    className="block mt-3 text-sm text-blue-500 align-baseline hover:text-blue-800"
+                  >
                     SignIn
-                  </a>
+                  </Link>
                 </div>
               </div>
             </div>
@@ -93,9 +103,20 @@ const Registration = () => {
     );
   }
 
-  const nameLabelClass = !firstNameFocus && firstName ? (validFirstName ? S.labelSuccess : S.labelFailure) : S.label;
-  const pwdLabelClass = !pwdFocus && pwd ? (validPwd ? S.labelSuccess : S.labelFailure) : S.label;
-  const matchLabelClass = !matchFocus && matchPwd ? (validMatch ? S.labelSuccess : S.labelFailure) : S.label;
+  const nameLabelClass =
+    !firstNameFocus && firstName
+      ? validFirstName
+        ? S.labelSuccess
+        : S.labelFailure
+      : S.label;
+  const pwdLabelClass =
+    !pwdFocus && pwd ? (validPwd ? S.labelSuccess : S.labelFailure) : S.label;
+  const matchLabelClass =
+    !matchFocus && matchPwd
+      ? validMatch
+        ? S.labelSuccess
+        : S.labelFailure
+      : S.label;
 
   return (
     <div className={S.container}>
@@ -108,18 +129,20 @@ const Registration = () => {
                 <div className={S.error} role="alert" ref={errRef}>
                   <svg
                     aria-hidden="true"
-                    class="flex-shrink-0 inline w-5 h-5 mr-3"
+                    className="flex-shrink-0 inline w-5 h-5 mr-3"
                     fill="currentColor"
                     viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg">
+                    xmlns="http://www.w3.org/2000/svg"
+                  >
                     <path
-                      fill-rule="evenodd"
+                      fillRule="evenodd"
                       d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
-                      clip-rule="evenodd"></path>
+                      clipRule="evenodd"
+                    ></path>
                   </svg>
-                  <span class="sr-only">Info</span>
+                  <span className="sr-only">Info</span>
                   <div>
-                    <span class="font-medium">Alert! </span>
+                    <span className="font-medium">Alert! </span>
                     {errMsg}
                   </div>
                 </div>
@@ -146,7 +169,9 @@ const Registration = () => {
                         aria-invalid={validFirstName ? false : true}
                         onChange={(e) => setFirstName(e.target.value)}
                       />
-                      {firstName && !firstNameFocus && <CheckMark state={validFirstName} />}
+                      {firstName && !firstNameFocus && (
+                        <CheckMark state={validFirstName} />
+                      )}
                     </div>
                     {firstName && !firstNameFocus && !validFirstName ? (
                       <p id="uidnote" className={S.parag} aria-live="assertive">
@@ -181,10 +206,16 @@ const Registration = () => {
                       {pwd && !pwdFocus && <CheckMark state={validPwd} />}
                     </div>
                     {pwd && !pwdFocus && !validPwd ? (
-                      <p ref={errRef} className={S.parag} aria-live="assertive" id="pwdnote">
+                      <p
+                        ref={errRef}
+                        className={S.parag}
+                        aria-live="assertive"
+                        id="pwdnote"
+                      >
                         8 to 24 characters.
                         <br />
-                        Must include uppercase & lowercase letters, a number, and special character.
+                        Must include uppercase & lowercase letters, a number,
+                        and special character.
                       </p>
                     ) : (
                       ""
@@ -208,10 +239,17 @@ const Registration = () => {
                         aria-invalid={validMatch ? false : true}
                         onChange={(e) => setMatchPwd(e.target.value)}
                       />
-                      {matchPwd && !matchFocus && <CheckMark state={validMatch} />}
+                      {matchPwd && !matchFocus && (
+                        <CheckMark state={validMatch} />
+                      )}
                     </div>
                     {matchPwd && !matchFocus && !validMatch ? (
-                      <p ref={errRef} className={S.parag} aria-live="assertive" id="confirmnote">
+                      <p
+                        ref={errRef}
+                        className={S.parag}
+                        aria-live="assertive"
+                        id="confirmnote"
+                      >
                         Must match the original password.
                       </p>
                     ) : (
@@ -220,7 +258,12 @@ const Registration = () => {
                   </div>
                 </div>
                 <div className="mb-6 text-center">
-                  <button className={S.btn} disabled={!validFirstName || !validPwd || !validMatch ? true : false}>
+                  <button
+                    className={S.btn}
+                    disabled={
+                      !validFirstName || !validPwd || !validMatch ? true : false
+                    }
+                  >
                     Register Account
                   </button>
                 </div>
@@ -231,9 +274,9 @@ const Registration = () => {
                   </a>
                 </div>
                 <div className="text-center">
-                  <a className={S.link} href="./index.html">
+                  <Link className={S.link} to="/login">
                     Already have an account? Login!
-                  </a>
+                  </Link>
                 </div>
               </form>
             </div>
