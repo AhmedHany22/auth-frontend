@@ -16,40 +16,37 @@ const LogIn = () => {
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
 
-  const [firstName, setFirstName] = useState("");
+  const [user, setUser] = useState("");
   const [pwd, setPwd] = useState("");
   const [errMsg, setErrMsg] = useState("");
-  const [success, setSuccess] = useState(false);
+  // const [success, setSuccess] = useState(false);
 
-  useEffect(() => {
-    setErrMsg("");
-  }, [firstName, pwd]);
+  useEffect(() => setErrMsg(""), [user, pwd]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const response = await axios.post(
-        LOGIN_URL,
-        JSON.stringify({ user: firstName, pwd })
-      );
-      // console.log(response.data, " ------Data");
-      // console.log(response.data.accessToken, " ------Token");
-      // console.log(JSON.stringify(response), " ------Response");
+      const response = await axios.post(LOGIN_URL, JSON.stringify({ user, pwd }), {
+        headers: { "Content-Type": "application/json" },
+        withCredentials: true,
+      });
       const accessToken = response?.data?.accessToken;
       const roles = response?.data?.roles;
-      setAuth({ user: firstName, pwd, accessToken, roles });
-      setFirstName("");
-      setPwd("");
-      setSuccess("Signed in successfully");
-      navigate(from, { replace: true });
-    } catch (e) {
-      if (!e?.response) setErrMsg("No server response");
-      else if (e.response?.status == 400)
-        setErrMsg("Missing username or password");
-      else if (e.response?.status == 401) setErrMsg("Unauthorized access");
-      else setErrMsg("LogIn Failed");
+      // console.log("Data------",response.data);
+      console.log("First Token------", response.data.accessToken);
+      console.log("Response------", JSON.stringify(response.data));
 
-      console.log("Error ------", e);
+      setAuth({ user, pwd, roles, accessToken });
+      setUser("");
+      setPwd("");
+      navigate(from, { replace: true });
+      // setSuccess("Signed in successfully");
+    } catch (err) {
+      if (!err?.response) setErrMsg("No server response");
+      else if (err.response?.status == 400) setErrMsg("Missing username or password");
+      else if (err.response?.status == 401) setErrMsg("Unauthorized access");
+      else setErrMsg("LogIn Failed");
+      console.log("Error------", err);
     }
   };
 
@@ -62,13 +59,7 @@ const LogIn = () => {
             <div className={ST.list}>
               {errMsg ? (
                 <div className={ST.error} role="alert" aria-live="assertive">
-                  <svg
-                    aria-hidden="true"
-                    className="flex-shrink-0 inline w-5 h-5 mr-3"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg aria-hidden="true" className="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path
                       fillRule="evenodd"
                       d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
@@ -82,15 +73,9 @@ const LogIn = () => {
                   </div>
                 </div>
               ) : null}
-              {success ? (
+              {/* {success ? (
                 <div className={ST.success} role="alert" aria-live="assertive">
-                  <svg
-                    aria-hidden="true"
-                    className="flex-shrink-0 inline w-5 h-5 mr-3"
-                    fill="currentColor"
-                    viewBox="0 0 20 20"
-                    xmlns="http://www.w3.org/2000/svg"
-                  >
+                  <svg aria-hidden="true" className="flex-shrink-0 inline w-5 h-5 mr-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg">
                     <path
                       fillRule="evenodd"
                       d="M18 10a8 8 0 11-16 0 8 8 0 0116 0zm-7-4a1 1 0 11-2 0 1 1 0 012 0zM9 9a1 1 0 000 2v3a1 1 0 001 1h1a1 1 0 100-2v-3a1 1 0 00-1-1H9z"
@@ -103,24 +88,15 @@ const LogIn = () => {
                     Signed In Successfully
                   </div>
                 </div>
-              ) : null}
+              ) : null} */}
               <h3 className={ST.title}>Sign In</h3>
               <form className={ST.form} onSubmit={handleSubmit}>
                 <div className="mb-4">
-                  <label className={ST.label} htmlFor="firstName">
+                  <label className={ST.label} htmlFor="user">
                     First Name
                   </label>
                   <div className="flex">
-                    <input
-                      type="text"
-                      id="firstName"
-                      placeholder="First Name"
-                      aria-describedby="uidnote"
-                      autoFocus
-                      value={firstName}
-                      className={ST.nameInput}
-                      onChange={(e) => setFirstName(e.target.value)}
-                    />
+                    <input type="text" id="user" placeholder="First Name" aria-describedby="uidnote" autoFocus value={user} className={ST.nameInput} onChange={(e) => setUser(e.target.value)} />
                   </div>
                 </div>
                 {/* -------------------------- */}
@@ -129,15 +105,7 @@ const LogIn = () => {
                     Password
                   </label>
                   <div className="flex">
-                    <input
-                      id="password"
-                      type="password"
-                      aria-describedby="pwdnote"
-                      placeholder="******************"
-                      value={pwd}
-                      className={ST.nameInput}
-                      onChange={(e) => setPwd(e.target.value)}
-                    />
+                    <input id="password" type="password" aria-describedby="pwdnote" placeholder="******************" value={pwd} className={ST.nameInput} onChange={(e) => setPwd(e.target.value)} />
                   </div>
                 </div>
                 <div className="mb-6 text-center">

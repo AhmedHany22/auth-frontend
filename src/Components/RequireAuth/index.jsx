@@ -3,7 +3,6 @@ import { Navigate, useLocation } from "react-router-dom";
 
 // Internal Import
 import useAuth from "../../Hooks/useAuth";
-
 import { ContentLayout } from "../Layout";
 
 const RequireAth = ({ allowedRoles }) => {
