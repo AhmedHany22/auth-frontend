@@ -5,11 +5,13 @@ import { useEffect, useState } from "react";
 // Internal Import
 import useAuth from "../../Hooks/useAuth";
 import useRefreshToken from "../../Hooks/useRefreshToken";
+import useLocalStorage from "../../Hooks/useLocalStorage";
 
 const PersistLogin = () => {
   const [isLoading, setIsLoading] = useState(true);
-  const { auth, persist } = useAuth();
+  const { auth } = useAuth();
   const refresh = useRefreshToken();
+  const [persist] = useLocalStorage("persist", false);
 
   useEffect(() => {
     let isMounted = true;
@@ -22,6 +24,7 @@ const PersistLogin = () => {
         isMounted && setIsLoading(false);
       }
     };
+    console.log(persist);
     !auth?.accessToken && persist ? verifyRefreshToken() : setIsLoading(false);
 
     return () => (isMounted = false);
