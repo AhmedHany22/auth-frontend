@@ -14,7 +14,7 @@ const RequireAth = ({ allowedRoles }) => {
   // This will replace the location the user want to go to with the login if there is no user
   return auth?.roles?.find((role) => allowedRoles?.includes(role)) ? (
     <ContentLayout />
-  ) : auth?.user ? (
+  ) : auth?.accessToken ? (
     <Navigate to="/unauthorized" state={{ from: location }} replace />
   ) : (
     <Navigate to="/login" state={{ from: location }} replace />

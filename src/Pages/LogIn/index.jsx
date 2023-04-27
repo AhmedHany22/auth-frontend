@@ -11,7 +11,7 @@ import useAuth from "./../../Hooks/useAuth";
 const LOGIN_URL = "/auth";
 
 const LogIn = () => {
-  const { setAuth } = useAuth();
+  const { persist, setPersist, setAuth } = useAuth();
   const navigate = useNavigate();
   const location = useLocation();
   const from = location.state?.from?.pathname || "/";
@@ -21,7 +21,10 @@ const LogIn = () => {
   const [errMsg, setErrMsg] = useState("");
   // const [success, setSuccess] = useState(false);
 
+  const togglePersist = () => setPersist((perv) => !perv);
+
   useEffect(() => setErrMsg(""), [user, pwd]);
+  useEffect(() => localStorage.setItem("persist", persist), [persist]);
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -105,8 +108,23 @@ const LogIn = () => {
                     Password
                   </label>
                   <div className="flex">
-                    <input id="password" type="password" aria-describedby="pwdnote" placeholder="******************" value={pwd} className={ST.nameInput} onChange={(e) => setPwd(e.target.value)} />
+                    <input id="password" type="password" placeholder="******************" value={pwd} className={ST.nameInput} onChange={(e) => setPwd(e.target.value)} />
                   </div>
+                </div>
+                <div className="flex items-center justify-between mb-5">
+                  <div className="flex items-start">
+                    <div className="flex items-center h-5">
+                      <input id="remember" checked={persist} onChange={togglePersist} aria-describedby="remember" type="checkbox" className={ST.persist} required="" />
+                    </div>
+                    <div className="ml-3 text-sm">
+                      <label htmlFor="remember" className="text-slate-300">
+                        Remember me
+                      </label>
+                    </div>
+                  </div>
+                  <a href="#" className="text-sm font-medium hover:underline text-primary-500">
+                    Forgot password?
+                  </a>
                 </div>
                 <div className="mb-6 text-center">
                   <button className={ST.btn} disabled={false}>
@@ -114,11 +132,6 @@ const LogIn = () => {
                   </button>
                 </div>
                 <hr className="mb-6 border-t" />
-                <div className="text-center">
-                  <a className={ST.link} href="#">
-                    Forgot Password?
-                  </a>
-                </div>
                 <div className="text-center">
                   <Link to="/register" className={ST.link}>
                     Need an account? SignUp!

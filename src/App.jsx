@@ -11,6 +11,7 @@ import Editor from "./Pages/Editor/index";
 import NotFound from "./Pages/NotFound/index";
 import Registration from "./Pages/Registration";
 import RequireAth from "./Components/RequireAuth";
+import PersistLogin from "./Components/PersistLogin";
 import Unauthorized from "./Pages/Unauthorized/index";
 
 function App() {
@@ -23,17 +24,19 @@ function App() {
           <Route path="register" element={<Registration />} />
           <Route path="unauthorized" element={<Unauthorized />} />
           {/* Protected Routes */}
-          <Route element={<RequireAth allowedRoles={[2001]} />}>
-            <Route path="/" element={<Home />} />
-          </Route>
-          <Route element={<RequireAth allowedRoles={[1984]} />}>
-            <Route path="/editor" element={<Editor />} />
-          </Route>
-          <Route element={<RequireAth allowedRoles={[5150]} />}>
-            <Route path="/admin" element={<Admin />} />
-          </Route>
-          <Route element={<RequireAth allowedRoles={[1984, 5150]} />}>
-            <Route path="/lounge" element={<Lounge />} />
+          <Route element={<PersistLogin />}>
+            <Route element={<RequireAth allowedRoles={[2001]} />}>
+              <Route path="/" element={<Home />} />
+            </Route>
+            <Route element={<RequireAth allowedRoles={[1984]} />}>
+              <Route path="/editor" element={<Editor />} />
+            </Route>
+            <Route element={<RequireAth allowedRoles={[5150]} />}>
+              <Route path="/admin" element={<Admin />} />
+            </Route>
+            <Route element={<RequireAth allowedRoles={[1984, 5150]} />}>
+              <Route path="/lounge" element={<Lounge />} />
+            </Route>
           </Route>
           {/* Catch All */}
           <Route path="*" element={<NotFound />} />

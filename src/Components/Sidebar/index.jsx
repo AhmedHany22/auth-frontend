@@ -1,25 +1,15 @@
 // External Import
-import {
-  AiOutlineHome,
-  AiOutlineEdit,
-  AiOutlineLogout,
-  AiOutlineCoffee,
-  AiOutlineSecurityScan,
-} from "react-icons/ai";
-import { useContext } from "react";
+import { AiOutlineHome, AiOutlineEdit, AiOutlineLogout, AiOutlineCoffee, AiOutlineSecurityScan } from "react-icons/ai";
 import { Link, useNavigate } from "react-router-dom";
-
-// Internal Import
-import AuthContext from "../../Context/AuthProvider";
+import useLogout from "../../Hooks/useLogout";
 
 const Sidebar = () => {
-  const { setAuth } = useContext(AuthContext);
   const navigate = useNavigate();
+  const logout = useLogout();
 
-  const logout = async () => {
-    // if used in more components, this should be in context    // axios to /logout endpoint
-    setAuth({});
-    navigate("/");
+  const signOut = async () => {
+    await logout();
+    navigate("/login");
   };
 
   return (
@@ -31,50 +21,35 @@ const Sidebar = () => {
       <div className="h-full px-3 pb-4 overflow-y-auto bg-white dark:bg-gray-800">
         <ul className="space-y-2 font-medium">
           <li>
-            <Link
-              to="/"
-              className="flex items-center p-2 rounded-lg text-white hover:bg-gray-700"
-            >
+            <Link to="/" className="flex items-center p-2 rounded-lg text-white hover:bg-gray-700">
               <AiOutlineHome className="flex-shrink-0 w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white" />
               <span className="flex-1 ml-3 whitespace-nowrap">Home</span>
             </Link>
           </li>
 
           <li>
-            <Link
-              to="/editor"
-              className="flex items-center p-2 rounded-lg text-white hover:bg-gray-700"
-            >
+            <Link to="/editor" className="flex items-center p-2 rounded-lg text-white hover:bg-gray-700">
               <AiOutlineEdit className="flex-shrink-0 w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white" />
               <span className="flex-1 ml-3 whitespace-nowrap">Editor</span>
             </Link>
           </li>
 
           <li>
-            <Link
-              to="/admin"
-              className="flex items-center p-2 rounded-lg text-white hover:bg-gray-700"
-            >
+            <Link to="/admin" className="flex items-center p-2 rounded-lg text-white hover:bg-gray-700">
               <AiOutlineSecurityScan className="flex-shrink-0 w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white" />
               <span className="flex-1 ml-3 whitespace-nowrap">Admin</span>
             </Link>
           </li>
 
           <li>
-            <Link
-              to="/lounge"
-              className="flex items-center p-2 rounded-lg text-white hover:bg-gray-700"
-            >
+            <Link to="/lounge" className="flex items-center p-2 rounded-lg text-white hover:bg-gray-700">
               <AiOutlineCoffee className="flex-shrink-0 w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white" />
               <span className="flex-1 ml-3 whitespace-nowrap">Lounge</span>
             </Link>
           </li>
 
           <li>
-            <button
-              onClick={logout}
-              className="flex items-center p-2 rounded-lg text-white hover:bg-gray-700"
-            >
+            <button onClick={signOut} className="flex items-center p-2 rounded-lg text-white hover:bg-gray-700">
               <AiOutlineLogout className="flex-shrink-0 w-6 h-6 transition duration-75 text-gray-400 group-hover:text-white" />
               <span className="flex-1 ml-3 whitespace-nowrap">Sign Out</span>
             </button>

@@ -1,5 +1,5 @@
 .container {
-  @apply font-mono bg-gray-800 min-h-screen flex justify-center items-center;
+  @apply font-mono bg-slate-800 min-h-screen flex justify-center items-center;
 }
 .boundries {
   @apply flex justify-center px-6 py-12;
@@ -9,7 +9,7 @@
 }
 .img {
   background-image: url("https://i.pinimg.com/originals/db/ff/12/dbff1285e0a96e4df82a7ab2ea6bd093.png");
-  @apply w-full h-auto bg-gray-400 hidden md:block lg:w-7/12 bg-cover bg-center rounded-l-lg;
+  @apply w-full h-auto bg-slate-400 hidden md:block lg:w-7/12 bg-cover bg-center rounded-l-lg;
 }
 
 .list {
@@ -25,13 +25,13 @@
   @apply mb-4 lg:flex lg:justify-between;
 }
 .nameInput {
-  @apply w-full px-3 py-2 text-sm leading-tight text-gray-700 border rounded shadow appearance-none;
+  @apply w-full px-3 py-2 text-sm leading-tight text-slate-700 border rounded shadow appearance-none;
 }
 .nameInput:focus {
   @apply outline outline-offset-1 outline-2 outline-sky-600;
 }
 .label {
-  @apply block mb-2 text-sm font-bold text-gray-700;
+  @apply block mb-2 text-sm font-bold text-slate-700;
 }
 .leftInput {
   @apply mb-4 lg:mr-2 md:mb-0;
@@ -40,7 +40,7 @@
   @apply lg:ml-2;
 }
 .longInput {
-  @apply px-3 py-2 mb-3 text-sm leading-tight text-gray-700 border rounded shadow appearance-none;
+  @apply px-3 py-2 mb-3 text-sm leading-tight text-slate-700 border rounded shadow appearance-none;
 }
 .longInput:focus {
   @apply outline outline-offset-1 outline-2 outline-sky-600;
@@ -55,14 +55,17 @@
   @apply outline-none;
 }
 .btn:disabled {
-  @apply bg-gray-500;
+  @apply bg-slate-500;
 }
 .link {
   @apply inline-block text-sm text-blue-500 align-baseline hover:text-blue-800;
 }
 .error {
-  @apply flex p-4 mb-4 text-sm text-red-800 border border-red-300 rounded-lg bg-red-50 dark:bg-gray-800 dark:text-red-400 dark:border-red-800;
+  @apply flex p-4 mb-4 text-sm border border-red-300 rounded-lg bg-red-50 dark:bg-slate-800 text-red-400 dark:border-red-800;
 }
 .success {
-  @apply flex p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-gray-800 dark:text-green-400 dark:border-green-800;
+  @apply flex p-4 mb-4 text-sm text-green-800 border border-green-300 rounded-lg bg-green-50 dark:bg-slate-800 dark:text-green-400 dark:border-green-800;
+}
+.persist {
+  @apply w-4 h-4 border rounded focus:ring-0 bg-slate-700 border-slate-600 ring-offset-slate-800;
 }
